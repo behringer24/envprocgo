@@ -1,0 +1,8 @@
+## Demonstration of envproc usage
+## in a configuration file
+
+this_app_path = ${env:PATH}
+
+# also multiple vars in a row work well
+
+just_another_dummy = ${env:PATH2}, ${env:TEST2}
