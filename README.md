@@ -12,7 +12,11 @@ Here envproc comes in handy. Ultra lightweight (apart from needing python 2.7 to
 envproc is written in python and tested with python 2.7 so you will nee a configured python interpreter
 
 ### Get the file
-Download envproc from github or clone the entire repository. Only the `envproc` file is needed. You might need to add the extension `.py` on windows based systems. 
+Download envproc from github or clone the entire repository. Only the `envproc` file is needed. You might need to add the extension `.py` on windows based systems to the downloaded file. 
+
+```
+wget https://raw.githubusercontent.com/behringer24/envproc/master/envproc
+```
 
 ## Usage
 
