@@ -17,9 +17,11 @@ envproc is written in Go (Golang) and compiles to a single binary file.
 Download the binary from envproc from github or clone the entire repository. Only the `envproc` file is needed. 
 
 ```
-> wget https://github.com/behringer24/envprocgo/releases/download/v1.0.2/envproc-v1.0.2-linux-amd64.tar.gz
-> tar -xvzf envproc-v1.0.2-linux-amd64.tar.gz
+> wget https://github.com/behringer24/envprocgo/releases/download/v1.0.3/envproc-v1.0.2-linux-amd64.tar.gz
+> tar -xvzf envproc-v1.0.3-linux-amd64.tar.gz
 ```
+
+Above is an example for version v1.0.3. Check for newer versions here https://github.com/behringer24/envprocgo/releases
 
 ### Install from source
 Make sure you have Go installed. Find more information here https://go.dev/dl/
