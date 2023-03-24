@@ -4,15 +4,15 @@ Easy environment variable preprocessor for configuration files
 ## Why
 When building docker containers you usually rely on environment variables as a source for configuration setting and exposing single settings to the user of the ready made containers. Unfortunately not all softwares allow the substitution of environment variables in their config files.
 
-Here envproc comes in handy. Ultra lightweight (apart from needing python 2.7 to run) and easy to use while setting up your containers during build or even on startup time.
+Here envproc comes in handy. Ultra lightweight and easy to use while setting up your containers during build or even on startup time.
 
 ## Installation
 
 ### Dependencies
-envproc is written in python and tested with python 2.7 so you will nee a configured python interpreter
+envproc is written in Go (Golang)
 
 ### Get the file
-Download envproc from github or clone the entire repository. Only the `envproc` file is needed. You might need to add the extension `.py` on windows based systems to the downloaded file. 
+Download the binary from envproc from github or clone the entire repository. Only the `envproc` file is needed. 
 
 ```
 wget https://raw.githubusercontent.com/behringer24/envproc/master/envproc
