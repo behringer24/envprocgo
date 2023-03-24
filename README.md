@@ -4,18 +4,33 @@ Easy environment variable preprocessor for configuration files
 ## Why
 When building docker containers you usually rely on environment variables as a source for configuration setting and exposing single settings to the user of the ready made containers. Unfortunately not all softwares allow the substitution of environment variables in their config files.
 
-Here envproc comes in handy. Ultra lightweight (apart from needing python 2.7 to run) and easy to use while setting up your containers during build or even on startup time.
+Here envproc comes in handy. Ultra lightweight and easy to use while setting up your containers during build or even on startup time.
 
 ## Installation
 
 ### Dependencies
-envproc is written in python and tested with python 2.7 so you will nee a configured python interpreter
+envproc is written in Go (Golang) and compiles to a single binary file.
 
-### Get the file
-Download envproc from github or clone the entire repository. Only the `envproc` file is needed. You might need to add the extension `.py` on windows based systems to the downloaded file. 
+### Install the binary
+Download the binary from envproc from github or clone the entire repository. Only the `envproc` file is needed. 
 
 ```
 wget https://raw.githubusercontent.com/behringer24/envproc/master/envproc
+```
+
+### Install from source
+Make sure you have Go installed. Find more information here https://go.dev/dl/
+
+Checkout the sources of the main branch or a specific (latest) release tag.
+
+```
+git clone git@github.com:behringer24/envprocgo.git
+```
+
+to install
+
+```
+go install
 ```
 
 ## Usage
@@ -24,21 +39,31 @@ wget https://raw.githubusercontent.com/behringer24/envproc/master/envproc
 Call `envproc -h` or `envproc --help` to get the standard commandline help
 
 ``` /bin/bash
-usage: envproc [-h] [-c CHAR] [-f] [-v] [infile] [outfile]
+> envproc -h
+envproc
+Config file preprocessor, inject environment variables into static config files
 
-Preprocess configuration files and fille with environment variables.
+Usage: envproc [-f] [-h] [-v] [-c] infile [outfile]
 
-positional arguments:
-  infile                the input file to preprocess. Or use pipe for stdin
-  outfile               the output file to write the parsed result to. Or use
-                        pipe for stdout
+Flags:
+-h, --help               Show this help text
+-v, --version            Show version information
+-f, --force              Show version information
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -c CHAR, --char CHAR  character that is used as an variable indicator
-  -f, --force           do not stop execution if environment variable is not
-                        found
-  -v, --version         show program's version number and exit
+Options:
+-c, --char               Another description (Default: $)
+
+Positional arguments:
+infile                   File to read from
+outfile                  File to write to
+```
+
+### Getting the current version
+To check the current version of the executable use
+
+``` /bin/bash
+> envproc -v
+envproc version v0.0.1
 ```
 
 ### Adding variables to config files
@@ -50,7 +75,7 @@ variable_name = ${env:ENVNAME}
 [...]
 ```
 
-In this example the placeholder `${env:ENVNAME}` will be replaced with the value of the environment variable `ENVNAME`. If the variable is not set, envproc will stop execution and display an error.
+In this example the placeholder `${env:ENVNAME}` will be replaced with the value of the environment variable `ENVNAME`. If the variable is not set, envproc will stop execution and display an error. You can override the stopping with the `-f|--force` parameter.
 
 So if you would like to put the value of the common `PATH` variable into your configuration file you would write:
 ```
@@ -64,21 +89,21 @@ envproc can be used in different ways, with the simple use of input- and output 
 
 #### Simple filenames for in and out
 ```
-envproc your_config_template.conf your_config.conf
+>envproc your_config_template.conf your_final_config.conf
 ```
 
-This will read `your_config_template.conf` as an input file template and write the processed results to `your_config.conf`.
+This will read `your_config_template.conf` as an input file template and write the processed results to `your_final_config.conf`.
 
-#### Using pipes for in and out
+#### Using pipe for output
 ```
-envproc < your_config_template.conf > your_config.conf
+>envproc your_config_template.conf > your_config.conf
 ```
 
 ### Changing the prefix character
 As default envproc uses `$` as the prefix character in the pattern it searches your configs for, like `${env:PATH}`. In some cases you might want to change it to another character. For this you can use the `--char` or `-c` option.
 
 ```
-envproc -c% infile.conf outfile.conf
+>envproc -c % infile.conf outfile.conf
 ```
 
-This changes the pattern it looks for to `%{env:PATH}`.
+The pattern envproc now looks for is `%{env:PATH}`.
