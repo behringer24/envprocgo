@@ -1,6 +1,7 @@
+[![Build + Test](https://github.com/behringer24/envprocgo/actions/workflows/go.yml/badge.svg)](https://github.com/behringer24/envprocgo/actions/workflows/go.yml)
+[![Release build](https://github.com/behringer24/envprocgo/actions/workflows/release.yml/badge.svg)](https://github.com/behringer24/envprocgo/actions/workflows/release.yml)
 # envproc
 Easy environment variable preprocessor for configuration files
-[![Build + Test](https://github.com/behringer24/envprocgo/actions/workflows/go.yml/badge.svg)](https://github.com/behringer24/envprocgo/actions/workflows/go.yml)
 
 ## Why
 When building docker containers you usually rely on environment variables as a source for configuration setting and exposing single settings to the user of the ready made containers. Unfortunately not all softwares allow the substitution of environment variables in their config files.
@@ -16,7 +17,8 @@ envproc is written in Go (Golang) and compiles to a single binary file.
 Download the binary from envproc from github or clone the entire repository. Only the `envproc` file is needed. 
 
 ```
-wget https://raw.githubusercontent.com/behringer24/envproc/master/envproc
+> wget https://github.com/behringer24/envprocgo/releases/download/v1.0.2/envproc-v1.0.2-linux-amd64.tar.gz
+> tar -xvzf envproc-v1.0.2-linux-amd64.tar.gz
 ```
 
 ### Install from source
@@ -25,13 +27,13 @@ Make sure you have Go installed. Find more information here https://go.dev/dl/
 Checkout the sources of the main branch or a specific (latest) release tag.
 
 ```
-git clone git@github.com:behringer24/envprocgo.git
+> git clone git@github.com:behringer24/envprocgo.git
 ```
 
 to install
 
 ```
-go install
+> go install
 ```
 
 ## Usage
@@ -97,14 +99,14 @@ This will read `your_config_template.conf` as an input file template and write t
 
 #### Using pipe for output
 ```
->envproc your_config_template.conf > your_config.conf
+> envproc your_config_template.conf > your_config.conf
 ```
 
 ### Changing the prefix character
 As default envproc uses `$` as the prefix character in the pattern it searches your configs for, like `${env:PATH}`. In some cases you might want to change it to another character. For this you can use the `--char` or `-c` option.
 
 ```
->envproc -c % infile.conf outfile.conf
+> envproc -c % infile.conf outfile.conf
 ```
 
 The pattern envproc now looks for is `%{env:PATH}`.
