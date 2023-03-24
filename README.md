@@ -1,5 +1,6 @@
 # envproc
 Easy environment variable preprocessor for configuration files
+[![Build + Test](https://github.com/behringer24/envprocgo/actions/workflows/go.yml/badge.svg)](https://github.com/behringer24/envprocgo/actions/workflows/go.yml)
 
 ## Why
 When building docker containers you usually rely on environment variables as a source for configuration setting and exposing single settings to the user of the ready made containers. Unfortunately not all softwares allow the substitution of environment variables in their config files.
