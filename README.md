@@ -16,9 +16,15 @@ envproc is written in Go (Golang) and compiles to a single binary file.
 ### Install the binary
 Download the binary from envproc from github or clone the entire repository. Only the `envproc` file is needed. 
 
-```
+``` /bin/bash
 > wget https://github.com/behringer24/envprocgo/releases/download/v1.0.3/envproc-v1.0.2-linux-amd64.tar.gz
 > tar -xvzf envproc-v1.0.3-linux-amd64.tar.gz
+```
+
+or
+
+``` /bin/bash
+> wget -qO- https://github.com/behringer24/envprocgo/releases/download/v1.0.3/envproc-v1.0.2-linux-amd64.tar.gz | tar xvz
 ```
 
 Above is an example for version v1.0.3. Check for newer versions here https://github.com/behringer24/envprocgo/releases
@@ -28,13 +34,13 @@ Make sure you have Go installed. Find more information here https://go.dev/dl/
 
 Checkout the sources of the main branch or a specific (latest) release tag.
 
-```
+``` /bin/bash
 > git clone git@github.com:behringer24/envprocgo.git
 ```
 
 to install
 
-```
+``` /bin/bash
 > go install
 ```
 
@@ -112,3 +118,7 @@ As default envproc uses `$` as the prefix character in the pattern it searches y
 ```
 
 The pattern envproc now looks for is `%{env:PATH}`.
+
+## License
+
+envproc and anvprocgo are released under the GNU GENERAL PUBLIC LICENSE Version 3. See [LICENSE](https://github.com/behringer24/envprocgo/blob/main/LICENSE)
