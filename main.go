@@ -27,7 +27,7 @@ import (
 const (
 	title       = "envproc"
 	description = "Config file preprocessor, inject environment variables into static config files"
-	version     = "v1.0.4"
+	version     = "v1.0.6"
 )
 
 var (
@@ -42,8 +42,8 @@ var (
 
 func parseArgs() {
 	flags := &argumentative.Flags{}
-	placeholderIndicator = flags.Flags().AddString("char", "c", false, "$", "Another description")
-	force = flags.Flags().AddBool("force", "f", "Show version information")
+	placeholderIndicator = flags.Flags().AddString("char", "c", false, "$", "Character introducing a placeholder")
+	force = flags.Flags().AddBool("force", "f", "Replace unset variables with an empty string instead of failing")
 	inFileName = flags.Flags().AddPositional("infile", true, "", "File to read from")
 	outFileName = flags.Flags().AddPositional("outfile", false, "", "File to write to")
 
@@ -64,7 +64,7 @@ func parseArgs() {
 }
 
 func parseRow(row string) (string, error) {
-	r, _ := regexp.Compile(fmt.Sprintf("\\%s\\{env\\:([a-zA-Z0-9]+)\\}", *placeholderIndicator))
+	r, _ := regexp.Compile(fmt.Sprintf("\\%s\\{env\\:([a-zA-Z0-9_]+)\\}", *placeholderIndicator))
 	matches := r.FindAllStringSubmatch(row, -1)
 	for _, match := range matches {
 		env, exists := os.LookupEnv(match[1])
@@ -91,7 +91,7 @@ func parser() int {
 
 	// open outfile or stdout
 	if *outFileName != "" {
-		if outfile, err = os.OpenFile(*outFileName, os.O_RDWR|os.O_CREATE, 0755); err != nil {
+		if outfile, err = os.OpenFile(*outFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644); err != nil {
 			fmt.Printf("Cannot open %s for writing. %s\n", *outFileName, err)
 			return 1
 		}

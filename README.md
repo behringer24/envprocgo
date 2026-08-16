@@ -88,6 +88,8 @@ variable_name = ${env:ENVNAME}
 
 In this example the placeholder `${env:ENVNAME}` will be replaced with the value of the environment variable `ENVNAME`. If the variable is not set, envproc will stop execution and display an error. You can override the stopping with the `-f|--force` parameter.
 
+A variable name may consist of letters, digits and underscores. Anything that does not match that is not recognised as a placeholder and is copied through unchanged.
+
 So if you would like to put the value of the common `PATH` variable into your configuration file you would write:
 ```
 [...]
