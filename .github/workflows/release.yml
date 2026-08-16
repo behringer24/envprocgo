@@ -14,10 +14,14 @@ jobs:
         goos: [windows, linux]
         goarch: [amd64, "386"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Run tests
         run: go test -v -p=1 -timeout=0 ./...
-      - uses: wangyoucao577/go-release-action@v1.37
+      # v1.37 built the Go download URL from `curl https://go.dev/VERSION?m=text`
+      # without taking the first line. That endpoint returns two lines now, the
+      # version and a timestamp, so the URL contained a newline and the download
+      # failed. Fixed upstream by piping through `head -n1`.
+      - uses: wangyoucao577/go-release-action@v1.55
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}

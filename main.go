@@ -27,7 +27,7 @@ import (
 const (
 	title       = "envproc"
 	description = "Config file preprocessor, inject environment variables into static config files"
-	version     = "v1.0.6"
+	version     = "v1.0.7"
 )
 
 var (
